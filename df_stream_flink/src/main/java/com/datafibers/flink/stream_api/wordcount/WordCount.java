@@ -51,9 +51,11 @@ public class WordCount {
 	public static void main(String[] args) throws Exception {
 
 		// Checking input parameters
+		// Filin 帮助工具 ，标准命令行读参数 的 工具 
 		final ParameterTool params = ParameterTool.fromArgs(args);
 
 		// set up the execution environment
+		// 流处理环境
 		final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
 		// make parameters available in the web interface

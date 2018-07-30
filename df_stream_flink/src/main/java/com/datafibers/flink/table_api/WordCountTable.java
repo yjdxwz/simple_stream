@@ -39,21 +39,22 @@ public class WordCountTable {
 
 	public static void main(String[] args) throws Exception {
 		ExecutionEnvironment env = ExecutionEnvironment.createCollectionsEnvironment();
+		// Table 运行环境
 		BatchTableEnvironment tEnv = TableEnvironment.getTableEnvironment(env);
-
+		// 定义三个对象
 		DataSet<WC> input = env.fromElements(
 				new WC("Hello", 1),
 				new WC("Ciao", 1),
 				new WC("Hello", 1));
-
+		// Streaming -> Table
 		Table table = tEnv.fromDataSet(input);
 
-		Table filtered = table
+		Table filteredTable = table
 				.groupBy("word")
 				.select("word, frequency.sum as frequency")
 				.filter("frequency = 2");
 
-		DataSet<WC> result = tEnv.toDataSet(filtered, WC.class);
+		DataSet<WC> result = tEnv.toDataSet(filteredTable, WC.class);
 
 		result.print();
 	}
