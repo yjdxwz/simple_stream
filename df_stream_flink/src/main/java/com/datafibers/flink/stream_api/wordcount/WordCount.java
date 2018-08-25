@@ -77,6 +77,7 @@ public class WordCount {
 			// split up the lines in pairs (2-tuples) containing: (word,1)
 			text.flatMap(new Tokenizer())
 			// group by the tuple field "0" and sum up tuple field "1"
+           // 数据按照key 进行划分
 			.keyBy(0).sum(1);
 
 		// emit result
@@ -106,12 +107,14 @@ public class WordCount {
 		@Override
 		public void flatMap(String value, Collector<Tuple2<String, Integer>> out) {
 			// normalize and split the line
+			//按照 word 进行划分
 			String[] tokens = value.toLowerCase().split("\\W+");
 
 			// emit the pairs
 			for (String token : tokens) {
 				if (token.length() > 0) {
 					out.collect(new Tuple2<>(token, 1));
+                    System.out.println("token.toString():" + token.toString());
 				}
 			}
 		}
