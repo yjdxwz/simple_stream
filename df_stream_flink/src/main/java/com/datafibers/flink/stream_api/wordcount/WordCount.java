@@ -109,7 +109,7 @@ public class WordCount {
 			// normalize and split the line
 			//按照 word 进行划分
 			String[] tokens = value.toLowerCase().split("\\W+");
-
+            //
 			// emit the pairs
 			for (String token : tokens) {
 				if (token.length() > 0) {
